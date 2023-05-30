@@ -1,0 +1,4 @@
+playground/
+media/
+*.pyc
+debug.log
