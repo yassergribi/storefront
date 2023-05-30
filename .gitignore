@@ -1,4 +1,6 @@
 playground/
+core/static/
 media/
 *.pyc
 debug.log
+.gitignore
