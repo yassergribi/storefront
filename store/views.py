@@ -1,13 +1,6 @@
-from distutils.sysconfig import customize_compiler
-from itertools import product
-from urllib import request
-from venv import create
 from django_filters.rest_framework import DjangoFilterBackend
 from django.db.models.aggregates import Count
-from django.shortcuts import get_object_or_404
 from rest_framework.filters import SearchFilter, OrderingFilter
-from rest_framework.response import Response
-from rest_framework import status
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
 from rest_framework.mixins import CreateModelMixin, UpdateModelMixin , RetrieveModelMixin, DestroyModelMixin
 from rest_framework.decorators import action
@@ -18,7 +11,7 @@ from .filters import ProductFilter
 from .pagination import DefaultPagination
 from .models import Cart, CartItem, Collection, Customer, Order, Product, OrderItem, ProductImage, Review
 from .serializers import AddCartItemSerializer, ProductImageSerializer, UpdateOrderSerializer , CartItemSerializer, CartSerializer, CollectionSerializer, CreateOrderSerializer, CustomerSerializer, OrderSerializer, ProductSerializer, ReviewSerializer, UpdateCartItemSerializer
-from store import serializers
+from . import serializers
 
 
 
