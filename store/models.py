@@ -1,9 +1,3 @@
-from distutils.command.upload import upload
-from email.mime import image
-from enum import unique
-from itertools import permutations, product
-from unicodedata import decimal
-from wsgiref.validate import validator
 from django.contrib import admin
 from django.conf import settings
 from django.db import models
