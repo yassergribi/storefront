@@ -6,6 +6,14 @@ name = "pypi"
 [packages]
 virtualenv = "*"
 django = "*"
+gunicorn = "*"
+django-cors-headers = "*"
+django-filter = "*"
+celery = "*"
+djangorestframework = "*"
+djoser = "*"
+psycopg2 = "*"
+django-rest-framework-nested = "*"
 
 [dev-packages]
 
