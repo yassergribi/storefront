@@ -1,7 +1,8 @@
-from store.models import Product , Collection
+from store.models import Customer, Order, OrderItem, Product , Collection
+from django.conf import settings
 from rest_framework import status
+from django.db.models.aggregates import Count
 from model_bakery import baker
-from django.contrib.auth.models import User
 from rest_framework.test import APIClient
 import pytest
 
@@ -137,6 +138,17 @@ class TestDeleteProduct:
 
         assert response.status_code == status.HTTP_204_NO_CONTENT
         assert Product.objects.all().count() == 0
+    
+    def test_if_product_is_an_order_item_returns_405(self,authenticate ,delete_product):
+        authenticate(is_staff = True)
+        product = baker.make(Product)
+        user = baker.make(settings.AUTH_USER_MODEL)
+        order = baker.make(Order, customer = user.customer)
+        orderitem = baker.make(OrderItem, order = order , product=product)
+
+        assert OrderItem.objects.all().count() > 0
+        response = delete_product(product)
+        assert response.status_code == status.HTTP_405_METHOD_NOT_ALLOWED
 
         
 @pytest.mark.django_db

@@ -1,5 +1,6 @@
-from store.models import Collection
+from store.models import Collection, Product
 from rest_framework import status
+#from django.db.models.aggregates import Count
 from model_bakery import baker
 import pytest
 
@@ -113,6 +114,17 @@ class TestDeleteCollection:
         assert response.status_code == status.HTTP_204_NO_CONTENT
         response = delete_collection(collection)
         assert response.status_code == status.HTTP_404_NOT_FOUND
+    
+    def test_if_collection_is_not_empty_returns_405(self, authenticate, delete_collection):
+        authenticate(is_staff = True ) 
+        #arrange
+        collection = baker.make(Collection)
+        product = baker.make(Product, collection=collection)
+        #assert
+        assert collection.products.count() > 0
+        response = delete_collection(collection)
+        assert response.status_code == status.HTTP_405_METHOD_NOT_ALLOWED
+        
 
         
 @pytest.mark.django_db       
